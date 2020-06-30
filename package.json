@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "react-sortable-tree": "^2.7.1"
   },
   "devDependencies": {
     "@snowpack/app-scripts-react": "^1.4.0",
@@ -16,6 +17,7 @@
     "@testing-library/react": "^10.0.3",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
+    "@types/react-sortable-tree": "^0.3.11",
     "jest": "^25.4.0",
     "prettier": "^2.0.0",
     "snowpack": "^2.5.0",
