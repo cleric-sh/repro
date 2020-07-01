@@ -1,0 +1,27 @@
+{
+  "name": "repro",
+  "version": "0.0.1",
+  "description": "Repro dgraph introspection problem",
+  "main": "index.js",
+  "repository": "https://github.com/cleric-sh/repro.git",
+  "author": "Sebastian Nemeth <sebastian@monkmage.com>",
+  "license": "MIT",
+  "scripts": {
+    "update": "run.env ts-node -T -O '{ \"module\": \"commonjs\" }' ./scripts/run-update.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.14",
+    "run.env": "^1.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-context": "^1.0.20",
+    "apollo-link-http": "^1.5.17",
+    "axios": "^0.19.2",
+    "graphql": "^15.2.0",
+    "isomorphic-unfetch": "^3.0.0"
+  }
+}
