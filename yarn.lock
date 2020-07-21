@@ -1242,10 +1242,10 @@
   dependencies:
     slash "^3.0.0"
 
-"@rollup/plugin-commonjs@^13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-13.0.0.tgz#8a1d684ba6848afe8b9e3d85649d4b2f6f7217ec"
-  integrity sha512-Anxc3qgkAi7peAyesTqGYidG5GRim9jtg8xhmykNaZkImtvjA7Wsqep08D2mYsqw1IF7rA3lYfciLgzUSgRoqw==
+"@rollup/plugin-commonjs@^13.0.0", "@rollup/plugin-commonjs@^14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-14.0.0.tgz#4285f9ec2db686a31129e5a2b415c94aa1f836f0"
+  integrity sha512-+PSmD9ePwTAeU106i9FRdc+Zb3XUWyW26mo5Atr2mk82hor8+nPwkztEjFo8/B1fJKfaQDg9aM2bzQkjhi7zOw==
   dependencies:
     "@rollup/pluginutils" "^3.0.8"
     commondir "^1.0.1"
@@ -2533,6 +2533,15 @@ diff-sequences@^25.2.6:
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-25.2.6.tgz#5f467c00edd35352b7bca46d7927d60e687a76dd"
   integrity sha512-Hq8o7+6GaZeoFjtpgvRBUknSXNeJiCx7V9Fr94ZMljNiCr9n9L8H8aJqgWOQiDDGdyn29fRNcDdRVJ5fdyihfg==
 
+dnd-core@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-7.7.0.tgz#3166aefc8c5b85ca4ade4ae836712a3108975fab"
+  integrity sha512-+YqwflWEY1MEAEl2QiEiRaglYkCwIZryyQwximQGuTOm/ns7fS6Lg/i7OCkrtjM10D5FhArf/VUHIL4ZaRBK0g==
+  dependencies:
+    asap "^2.0.6"
+    invariant "^2.2.4"
+    redux "^4.0.1"
+
 dnd-core@^9.5.1:
   version "9.5.1"
   resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-9.5.1.tgz#e9ec02d33529b68fa528865704d40ac4b14f2baf"
@@ -3198,7 +3207,7 @@ inherits@2, inherits@^2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-invariant@^2.2.2, invariant@^2.2.4:
+invariant@^2.1.0, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -4736,6 +4745,17 @@ react-dnd-html5-backend@^9.3.4:
   dependencies:
     dnd-core "^9.5.1"
 
+react-dnd@^7.3.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-7.7.0.tgz#9d983331ecf87ba33d058d861e6ca9adb8253a2e"
+  integrity sha512-anpJDKMgdXE6kXvtBFmIAe1fuaexpVy7meUyNjiTfCnjQ1mRvnttGTVvcW9fMKijsUQYadiyvzd3BRxteFuVXg==
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.1"
+    dnd-core "^7.7.0"
+    hoist-non-react-statics "^3.3.0"
+    invariant "^2.1.0"
+    shallowequal "^1.1.0"
+
 react-dnd@^9.3.1, react-dnd@^9.3.4:
   version "9.5.1"
   resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-9.5.1.tgz#907e55c791d6c50cbed1a4021c14b989b86ac467"
@@ -4841,7 +4861,7 @@ redent@^3.0.0:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
 
-redux@^4.0.4:
+redux@^4.0.1, redux@^4.0.4:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
   integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==

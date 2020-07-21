@@ -9,7 +9,8 @@
   "dependencies": {
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-sortable-tree": "^2.7.1"
+    "react-sortable-tree": "^2.7.1",
+    "react-dnd": "^7.3.0"
   },
   "devDependencies": {
     "@snowpack/app-scripts-react": "^1.4.0",
@@ -22,5 +23,8 @@
     "prettier": "^2.0.0",
     "snowpack": "^2.5.0",
     "typescript": "^3.8.0"
+  },
+  "resolutions": {
+    "@rollup/plugin-commonjs": "^14.0.0"
   }
 }
