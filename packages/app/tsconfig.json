@@ -1,6 +1,11 @@
 {
-  "include": ["src", "types"],
-  "exclude": ["node_modules"],
+  "include": [
+    "src",
+    "types"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "extends": "@snowpack/app-scripts-react/tsconfig.base.json",
   "compilerOptions": {
     // You can't currently define paths in your 'extends' config,
@@ -8,8 +13,24 @@
     // Don't change these unless you know what you're doing.
     // See: https://github.com/microsoft/TypeScript/issues/25430
     "baseUrl": "./",
-    "paths": { "*": ["web_modules/.types/*"] }
+    "paths": {
+      "*": [
+        "web_modules/.types/*"
+      ]
+    },
     // Feel free to add/edit new config options below:
     // ...
-  }
+    "noEmit": false,
+    "composite": true,
+    "incremental": true,
+    "declaration": true,
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "rootDir": "src"
+  },
+  "references": [
+    {
+      "path": "../common",
+    }
+  ],
 }
