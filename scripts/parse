@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+path="${1:-console.example}"
+echo "Parsing '$path'..."
+echo "====================================================="
+tree-sitter parse $path

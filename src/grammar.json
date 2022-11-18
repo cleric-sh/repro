@@ -1,0 +1,46 @@
+{
+  "name": "my_grammar",
+  "rules": {
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "service_declaration"
+          }
+        ]
+      }
+    },
+    "service_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "service"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "service_name"
+        }
+      ]
+    },
+    "service_name": {
+      "type": "PATTERN",
+      "value": "[_a-zA-Z\\-][\\w_]*"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+

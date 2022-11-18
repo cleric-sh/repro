@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+echo "Testing..."
+echo "====================================================="
+tree-sitter test

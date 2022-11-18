@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+SRC=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo "Watching for changes..."
+
+fswatch -0 . | while read -d "" path
+  do    
+    rel_path=$(realpath $path --relative-to="$PWD")    
+    case $rel_path in
+
+        grammar.js)
+            echo
+            $SRC/generate $rel_path
+            $SRC/build &
+            $SRC/test $rel_path
+            echo            
+            ;;
+        
+        *.example)
+            echo
+            $SRC/parse $rel_path
+            ;;
+
+        corpus/*)
+            echo
+            $SRC/test $rel_path
+            ;;
+
+        *) ;;
+    esac
+  done
