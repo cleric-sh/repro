@@ -46,6 +46,9 @@ describe('my_grammar', () => {
             editedNodes.push(node)
         })
 
+        expect(previousNodes.length).toBeGreaterThan(0);
+        expect(editedNodes.length).toBeGreaterThan(0);
+        
 
         // Compare all node ids, to see how many have been re-used.
         const intersectingNodeIds = _.intersection(previousNodes.map(n => n.id), editedNodes.map(n => n.id));
@@ -61,6 +64,13 @@ describe('my_grammar', () => {
 
         // In the above, I would have expected nodes related to 'service foo' and 'service bar' to be re-used.
 
+
+        /**
+         * IDEA
+         * It could be that it's the WASM bridge that web-tree-sitter uses.
+         * Let's:
+         * - [ ] reproduce this in node-tree-sitter
+         */
         
     })
 })
