@@ -1,6 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import './button.css';
+
+import unfetch from 'isomorphic-unfetch';
+
+unfetch;
 
 /**
  * Primary UI component for user interaction
