@@ -1,0 +1,59 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    devDependencies:
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  packages/pkg1:
+    dependencies:
+      type-fest:
+        specifier: ^4.3.3
+        version: 4.3.3
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/pkg2:
+    dependencies:
+      '@cleric/common':
+        specifier: workspace:*
+        version: link:../pkg1
+      type-fest:
+        specifier: ^4.3.3
+        version: 4.3.3
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/tsconfig:
+    devDependencies:
+      '@tsconfig/strictest':
+        specifier: ^2.0.2
+        version: 2.0.2
+
+packages:
+
+  /@tsconfig/strictest@2.0.2:
+    resolution: {integrity: sha512-jt4jIsWKvUvuY6adJnQJlb/UR7DdjC8CjHI/OaSQruj2yX9/K6+KOvDt/vD6udqos/FUk5Op66CvYT7TBLYO5Q==}
+    dev: true
+
+  /type-fest@4.3.3:
+    resolution: {integrity: sha512-bxhiFii6BBv6UiSDq7uKTMyADT9unXEl3ydGefndVLxFeB44LRbT4K7OJGDYSyDrKnklCC1Pre68qT2wbUl2Aw==}
+    engines: {node: '>=16'}
+    dev: false
+
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: true
