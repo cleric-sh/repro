@@ -26,3 +26,9 @@ function FuncThing<A extends ThingArgs>() {
   })
 
 }
+
+/**
+ * Only shown in vscode. tsc compiles without errors.
+ * Only shown after a change has been made to the file. Initial type check on load shows no errors.
+ * Only shown when noImplicitAny: true
+ */
