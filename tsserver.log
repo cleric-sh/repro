@@ -1,0 +1,582 @@
+Info 0    [21:46:37.249] Starting TS Server
+Info 1    [21:46:37.249] Version: 5.2.2
+Info 2    [21:46:37.249] Arguments: /Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin) /Users/martaver/Projects/repro/node_modules/typescript/lib/tsserver.js --useInferredProjectPerProjectRoot --enableTelemetry --cancellationPipeName /var/folders/s8/2m36h5bx6nn14zf1vmvbk87w0000gn/T/vscode-typescript501/18d07063218b1462bcda/tscancellation-c8818197e333d23e7a11.tmp* --logVerbosity verbose --logFile /Users/martaver/Library/Application Support/Code/logs/20231007T205854/window4/exthost/vscode.typescript-language-features/tsserver-log-yETI48/tsserver.log --locale en --noGetErrOnBackgroundUpdate --validateDefaultNpmLocation --useNodeIpc
+Info 3    [21:46:37.249] Platform: darwin NodeVersion: v18.15.0 CaseSensitive: false
+Info 4    [21:46:37.249] ServerMode: undefined hasUnknownServerMode: undefined
+Info 5    [21:46:37.255] Binding...
+Info 6    [21:46:37.258] request:
+    {
+      "seq": 0,
+      "type": "request",
+      "command": "configure",
+      "arguments": {
+        "hostInfo": "vscode",
+        "preferences": {
+          "providePrefixAndSuffixTextForRename": true,
+          "allowRenameOfImportPath": true,
+          "includePackageJsonAutoImports": "auto",
+          "excludeLibrarySymbolsInNavTo": true
+        },
+        "watchOptions": {}
+      }
+    }
+Info 7    [21:46:37.259] Host information vscode
+Info 8    [21:46:37.259] Host watch options changed to undefined, it will be take effect for next watches.
+Info 9    [21:46:37.259] response:
+    {"seq":0,"type":"response","command":"configure","request_seq":0,"success":true}
+Perf 10   [21:46:37.259] 0::configure: async elapsed time (in milliseconds) 0.8972
+Info 11   [21:46:37.259] request:
+    {
+      "seq": 1,
+      "type": "request",
+      "command": "compilerOptionsForInferredProjects",
+      "arguments": {
+        "options": {
+          "module": "ESNext",
+          "moduleResolution": "Node",
+          "target": "ES2020",
+          "jsx": "react",
+          "strictNullChecks": true,
+          "strictFunctionTypes": true,
+          "sourceMap": true,
+          "allowJs": true,
+          "allowSyntheticDefaultImports": true,
+          "allowNonTsExtensions": true,
+          "resolveJsonModule": true
+        }
+      }
+    }
+Perf 12   [21:46:37.259] 1::compilerOptionsForInferredProjects: elapsed time (in milliseconds) 0.2759
+Info 13   [21:46:37.260] response:
+    {"seq":0,"type":"response","command":"compilerOptionsForInferredProjects","request_seq":1,"success":true,"body":true}
+Info 14   [21:46:37.260] request:
+    {
+      "seq": 2,
+      "type": "request",
+      "command": "updateOpen",
+      "arguments": {
+        "changedFiles": [],
+        "closedFiles": [],
+        "openFiles": [
+          {
+            "file": "/Users/martaver/Projects/repro/index.ts",
+            "fileContent": "function Builder<I>(def: I) {\n\n  return def;\n}\n\ninterface IThing {\n  doThing: (args: { value: object }) => string\n  doAnotherThing: () => void\n}\n\nBuilder<IThing>({\n\n  doThing(args: { value: object }) {\n    /**\n     * ts7022 is shown on 'value' below.\n     * \n     * Only shown when func param 'arg' type is declared. Removing the declaration resolves the error.\n     * Only shown in vscode. tsc compiles without errors.\n     * Only shown on second pass, after a change has been made to the file. Initial type check on load shows no errors.\n     * Only shown when noImplicitAny: true\n     * \n     * In a more complex file, declaring this function\n     * after 'doAnotherThing' prevents the error being\n     * displayed.\n     */\n    const { value } = this.args\n    return `${value}`\n  },\n\n  doAnotherThing() { },\n\n})",
+            "projectRootPath": "/Users/martaver/Projects/repro",
+            "scriptKindName": "TS"
+          }
+        ]
+      }
+    }
+Info 15   [21:46:37.260] Search path: /Users/martaver/Projects/repro
+Info 16   [21:46:37.261] For info: /Users/martaver/Projects/repro/index.ts :: Config file name: /Users/martaver/Projects/repro/tsconfig.json
+Info 17   [21:46:37.261] Creating configuration project /Users/martaver/Projects/repro/tsconfig.json
+Info 18   [21:46:37.263] FileWatcher:: Added:: WatchInfo: /Users/martaver/Projects/repro/tsconfig.json 2000 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Config file
+Info 19   [21:46:37.264] event:
+    {"seq":0,"type":"event","event":"projectLoadingStart","body":{"projectName":"/Users/martaver/Projects/repro/tsconfig.json","reason":"Creating possible configured project for /Users/martaver/Projects/repro/index.ts to open"}}
+Info 20   [21:46:37.273] Config: /Users/martaver/Projects/repro/tsconfig.json : {
+ "rootNames": [
+  "/Users/martaver/Projects/repro/index.ts"
+ ],
+ "options": {
+  "noEmit": true,
+  "noImplicitAny": true,
+  "configFilePath": "/Users/martaver/Projects/repro/tsconfig.json"
+ }
+}
+Info 21   [21:46:37.274] DirectoryWatcher:: Added:: WatchInfo: /users/martaver/projects/repro 1 undefined Config: /Users/martaver/Projects/repro/tsconfig.json WatchType: Wild card directory
+Info 22   [21:46:37.275] Elapsed:: 0.5723142623901367ms DirectoryWatcher:: Added:: WatchInfo: /users/martaver/projects/repro 1 undefined Config: /Users/martaver/Projects/repro/tsconfig.json WatchType: Wild card directory
+Info 23   [21:46:37.276] Starting updateGraphWorker: Project: /Users/martaver/Projects/repro/tsconfig.json
+Info 24   [21:46:37.288] DirectoryWatcher:: Added:: WatchInfo: /users/martaver/projects/repro/node_modules 1 undefined WatchType: node_modules for closed script infos and package.jsons affecting module specifier cache
+Info 25   [21:46:37.288] Elapsed:: 0.18236303329467773ms DirectoryWatcher:: Added:: WatchInfo: /users/martaver/projects/repro/node_modules 1 undefined WatchType: node_modules for closed script infos and package.jsons affecting module specifier cache
+Info 26   [21:46:37.293] DirectoryWatcher:: Added:: WatchInfo: /Users/martaver/Projects/repro/node_modules 1 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Failed Lookup Locations
+Info 27   [21:46:37.293] Elapsed:: 0.015033245086669922ms DirectoryWatcher:: Added:: WatchInfo: /Users/martaver/Projects/repro/node_modules 1 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Failed Lookup Locations
+Info 28   [21:46:37.293] DirectoryWatcher:: Added:: WatchInfo: /Users/martaver/Projects/node_modules 1 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Failed Lookup Locations
+Info 29   [21:46:37.294] Elapsed:: 0.4242591857910156ms DirectoryWatcher:: Added:: WatchInfo: /Users/martaver/Projects/node_modules 1 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Failed Lookup Locations
+Info 30   [21:46:37.803] DirectoryWatcher:: Added:: WatchInfo: /Users/martaver/Projects/repro/node_modules/@types 1 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Type roots
+Info 31   [21:46:37.803] Elapsed:: 0.09696340560913086ms DirectoryWatcher:: Added:: WatchInfo: /Users/martaver/Projects/repro/node_modules/@types 1 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Type roots
+Info 32   [21:46:37.803] DirectoryWatcher:: Added:: WatchInfo: /Users/martaver/Projects/node_modules/@types 1 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Type roots
+Info 33   [21:46:37.804] Elapsed:: 0.06122112274169922ms DirectoryWatcher:: Added:: WatchInfo: /Users/martaver/Projects/node_modules/@types 1 undefined Project: /Users/martaver/Projects/repro/tsconfig.json WatchType: Type roots
+Info 34   [21:46:37.804] Finishing updateGraphWorker: Project: /Users/martaver/Projects/repro/tsconfig.json Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 527.4747200012207ms
+Info 35   [21:46:37.804] Project '/Users/martaver/Projects/repro/tsconfig.json' (Configured)
+Info 36   [21:46:37.805] 	Files (8)
+	/Users/martaver/Projects/repro/node_modules/typescript/lib/lib.d.ts
+	/Users/martaver/Projects/repro/node_modules/typescript/lib/lib.es5.d.ts
+	/Users/martaver/Projects/repro/node_modules/typescript/lib/lib.dom.d.ts
+	/Users/martaver/Projects/repro/node_modules/typescript/lib/lib.webworker.importscripts.d.ts
+	/Users/martaver/Projects/repro/node_modules/typescript/lib/lib.scripthost.d.ts
+	/Users/martaver/Projects/repro/node_modules/typescript/lib/lib.decorators.d.ts
+	/Users/martaver/Projects/repro/node_modules/typescript/lib/lib.decorators.legacy.d.ts
+	/Users/martaver/Projects/repro/index.ts
+
+
+	node_modules/typescript/lib/lib.d.ts
+	  Default library for target 'es5'
+	node_modules/typescript/lib/lib.es5.d.ts
+	  Library referenced via 'es5' from file 'node_modules/typescript/lib/lib.d.ts'
+	node_modules/typescript/lib/lib.dom.d.ts
+	  Library referenced via 'dom' from file 'node_modules/typescript/lib/lib.d.ts'
+	node_modules/typescript/lib/lib.webworker.importscripts.d.ts
+	  Library referenced via 'webworker.importscripts' from file 'node_modules/typescript/lib/lib.d.ts'
+	node_modules/typescript/lib/lib.scripthost.d.ts
+	  Library referenced via 'scripthost' from file 'node_modules/typescript/lib/lib.d.ts'
+	node_modules/typescript/lib/lib.decorators.d.ts
+	  Library referenced via 'decorators' from file 'node_modules/typescript/lib/lib.es5.d.ts'
+	node_modules/typescript/lib/lib.decorators.legacy.d.ts
+	  Library referenced via 'decorators.legacy' from file 'node_modules/typescript/lib/lib.es5.d.ts'
+	index.ts
+	  Matched by default include pattern '**/*'
+
+Info 37   [21:46:37.805] -----------------------------------------------
+Info 38   [21:46:37.807] FileWatcher:: Added:: WatchInfo: /users/martaver/projects/repro/package.json 250 undefined WatchType: package.json file
+Info 39   [21:46:37.807] event:
+    {"seq":0,"type":"event","event":"projectLoadingFinish","body":{"projectName":"/Users/martaver/Projects/repro/tsconfig.json"}}
+Info 40   [21:46:37.808] event:
+    {"seq":0,"type":"event","event":"telemetry","body":{"telemetryEventName":"projectInfo","payload":{"projectId":"cda76013be7d24ef9e60003ff83e0475c3a9541b5af867bf26fea57a6291f836","fileStats":{"js":0,"jsSize":0,"jsx":0,"jsxSize":0,"ts":1,"tsSize":814,"tsx":0,"tsxSize":0,"dts":7,"dtsSize":1547809,"deferred":0,"deferredSize":0},"compilerOptions":{"noEmit":true,"noImplicitAny":true},"typeAcquisition":{"enable":false,"include":false,"exclude":false},"extends":false,"files":false,"include":false,"exclude":true,"compileOnSave":false,"configFileName":"tsconfig.json","projectType":"configured","languageServiceEnabled":true,"version":"5.2.2"}}}
+Info 41   [21:46:37.808] event:
+    {"seq":0,"type":"event","event":"configFileDiag","body":{"triggerFile":"/Users/martaver/Projects/repro/index.ts","configFile":"/Users/martaver/Projects/repro/tsconfig.json","diagnostics":[]}}
+Info 42   [21:46:37.809] Project '/Users/martaver/Projects/repro/tsconfig.json' (Configured)
+Info 42   [21:46:37.809] 	Files (8)
+
+Info 42   [21:46:37.809] -----------------------------------------------
+Info 42   [21:46:37.809] Open files: 
+Info 42   [21:46:37.809] 	FileName: /Users/martaver/Projects/repro/index.ts ProjectRootPath: /Users/martaver/Projects/repro
+Info 42   [21:46:37.809] 		Projects: /Users/martaver/Projects/repro/tsconfig.json
+Perf 42   [21:46:37.809] 2::updateOpen: elapsed time (in milliseconds) 549.5274
+Info 43   [21:46:37.809] response:
+    {"seq":0,"type":"response","command":"updateOpen","request_seq":2,"success":true,"performanceData":{"updateGraphDurationMs":527.4747200012207},"body":true}
+Info 44   [21:46:37.809] event:
+    {"seq":0,"type":"event","event":"typingsInstallerPid","body":{"pid":58748}}
+Info 45   [21:46:37.810] request:
+    {
+      "seq": 4,
+      "type": "request",
+      "command": "configure",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "formatOptions": {
+          "tabSize": 2,
+          "indentSize": 2,
+          "convertTabsToSpaces": true,
+          "newLineCharacter": "\n",
+          "insertSpaceAfterCommaDelimiter": true,
+          "insertSpaceAfterConstructor": false,
+          "insertSpaceAfterSemicolonInForStatements": true,
+          "insertSpaceBeforeAndAfterBinaryOperators": true,
+          "insertSpaceAfterKeywordsInControlFlowStatements": true,
+          "insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+          "insertSpaceBeforeFunctionParenthesis": false,
+          "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+          "insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+          "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+          "insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": true,
+          "insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
+          "insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
+          "insertSpaceAfterTypeAssertion": false,
+          "placeOpenBraceOnNewLineForFunctions": false,
+          "placeOpenBraceOnNewLineForControlBlocks": false,
+          "semicolons": "ignore",
+          "indentSwitchCase": true
+        },
+        "preferences": {
+          "quotePreference": "auto",
+          "importModuleSpecifierEnding": "auto",
+          "jsxAttributeCompletionStyle": "auto",
+          "allowTextChangesInNewFiles": true,
+          "providePrefixAndSuffixTextForRename": true,
+          "allowRenameOfImportPath": true,
+          "includeAutomaticOptionalChainCompletions": true,
+          "provideRefactorNotApplicableReason": true,
+          "generateReturnInDocTemplate": true,
+          "includeCompletionsForImportStatements": true,
+          "includeCompletionsWithSnippetText": true,
+          "includeCompletionsWithClassMemberSnippets": true,
+          "includeCompletionsWithObjectLiteralMethodSnippets": true,
+          "autoImportFileExcludePatterns": [],
+          "useLabelDetailsInCompletionEntries": true,
+          "allowIncompleteCompletions": true,
+          "displayPartsForJSDoc": true,
+          "disableLineTextInReferences": true,
+          "interactiveInlayHints": true,
+          "includeInlayParameterNameHints": "none",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": false,
+          "includeInlayFunctionParameterTypeHints": false,
+          "includeInlayVariableTypeHints": false,
+          "includeInlayVariableTypeHintsWhenTypeMatchesName": false,
+          "includeInlayPropertyDeclarationTypeHints": false,
+          "includeInlayFunctionLikeReturnTypeHints": false,
+          "includeInlayEnumMemberValueHints": false
+        }
+      }
+    }
+Info 46   [21:46:37.810] Host configuration update for file /Users/martaver/Projects/repro/index.ts
+Info 47   [21:46:37.810] response:
+    {"seq":0,"type":"response","command":"configure","request_seq":4,"success":true}
+Perf 48   [21:46:37.810] 4::configure: async elapsed time (in milliseconds) 0.2888
+Info 49   [21:46:37.810] request:
+    {
+      "seq": 5,
+      "type": "request",
+      "command": "getApplicableRefactors",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "startLine": 30,
+        "startOffset": 24,
+        "endLine": 30,
+        "endOffset": 24,
+        "includeInteractiveActions": true
+      }
+    }
+Perf 50   [21:46:37.841] 5::getApplicableRefactors: elapsed time (in milliseconds) 30.8766
+Info 51   [21:46:37.841] response:
+    {"seq":0,"type":"response","command":"getApplicableRefactors","request_seq":5,"success":true,"body":[{"name":"Convert export","description":"Convert default export to named export","actions":[{"name":"Convert default export to named export","description":"Convert default export to named export","kind":"refactor.rewrite.export.named","notApplicableReason":"Could not find export statement"},{"name":"Convert named export to default export","description":"Convert named export to default export","kind":"refactor.rewrite.export.default","notApplicableReason":"Could not find export statement"}]},{"name":"Convert import","description":"Convert namespace import to named imports","actions":[{"name":"Convert namespace import to named imports","description":"Convert namespace import to named imports","kind":"refactor.rewrite.import.named","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to default import","actions":[{"name":"Convert named imports to default import","description":"Convert named imports to default import","kind":"refactor.rewrite.import.default","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to namespace import","actions":[{"name":"Convert named imports to namespace import","description":"Convert named imports to namespace import","kind":"refactor.rewrite.import.namespace","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Extract type","description":"Extract type","actions":[{"name":"Extract to typedef","description":"Extract to typedef","kind":"refactor.extract.typedef","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to type alias","description":"Extract to type alias","kind":"refactor.extract.type","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to interface","description":"Extract to interface","kind":"refactor.extract.interface","notApplicableReason":"Selection is not a valid type node"}]},{"name":"Move to a new file","description":"Move to a new file","actions":[{"name":"Move to a new file","description":"Move to a new file","kind":"refactor.move.newFile"}]},{"name":"Move to file","description":"Move to file","actions":[{"name":"Move to file","description":"Move to file","kind":"refactor.move.file"}]},{"name":"Add or remove braces in an arrow function","description":"Add or remove braces in an arrow function","actions":[{"name":"Add braces to arrow function","description":"Add braces to arrow function","kind":"refactor.rewrite.arrow.braces.add","notApplicableReason":"Could not find a containing arrow function"},{"name":"Remove braces from arrow function","description":"Remove braces from arrow function","kind":"refactor.rewrite.arrow.braces.remove","notApplicableReason":"Could not find a containing arrow function"}]},{"name":"Convert to template string","description":"Convert to template string","actions":[{"name":"Convert to template string","description":"Convert to template string","kind":"refactor.rewrite.string","notApplicableReason":"Can only convert string concatenation"}]},{"name":"Extract Symbol","description":"Extract function","actions":[{"name":"Extract Function","description":"Extract function","kind":"refactor.extract.function","notApplicableReason":"Cannot extract empty range."}]},{"name":"Extract Symbol","description":"Extract constant","actions":[{"name":"Extract Constant","description":"Extract constant","kind":"refactor.extract.constant","notApplicableReason":"Cannot extract empty range."}]},{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","actions":[{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","kind":"refactor.rewrite.property.generateAccessors","notApplicableReason":"Could not find property for which to generate accessor"}]},{"name":"Infer function return type","description":"Infer function return type","actions":[{"name":"Infer function return type","description":"Infer function return type","kind":"refactor.rewrite.function.returnType","notApplicableReason":"Return type must be inferred from a function"}]}]}
+Info 52   [21:46:37.842] request:
+    {
+      "seq": 6,
+      "type": "request",
+      "command": "geterr",
+      "arguments": {
+        "delay": 0,
+        "files": [
+          "/Users/martaver/Projects/repro/index.ts"
+        ]
+      }
+    }
+Perf 53   [21:46:37.842] 6::geterr: async elapsed time (in milliseconds) 0.9393
+Info 54   [21:46:37.845] event:
+    {"seq":0,"type":"event","event":"syntaxDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[]}}
+Info 55   [21:46:37.872] event:
+    {"seq":0,"type":"event","event":"semanticDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[]}}
+Info 56   [21:46:37.874] event:
+    {"seq":0,"type":"event","event":"suggestionDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[{"start":{"line":13,"offset":11},"end":{"line":13,"offset":15},"text":"'args' is declared but its value is never read.","code":6133,"category":"suggestion","reportsUnnecessary":true}]}}
+Info 57   [21:46:37.874] event:
+    {"seq":0,"type":"event","event":"requestCompleted","body":{"request_seq":6}}
+Info 58   [21:46:38.185] request:
+    {
+      "seq": 7,
+      "type": "request",
+      "command": "getApplicableRefactors",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "startLine": 30,
+        "startOffset": 24,
+        "endLine": 30,
+        "endOffset": 24,
+        "includeInteractiveActions": true
+      }
+    }
+Perf 59   [21:46:38.185] 7::getApplicableRefactors: elapsed time (in milliseconds) 0.5642
+Info 60   [21:46:38.185] response:
+    {"seq":0,"type":"response","command":"getApplicableRefactors","request_seq":7,"success":true,"body":[{"name":"Convert export","description":"Convert default export to named export","actions":[{"name":"Convert default export to named export","description":"Convert default export to named export","kind":"refactor.rewrite.export.named","notApplicableReason":"Could not find export statement"},{"name":"Convert named export to default export","description":"Convert named export to default export","kind":"refactor.rewrite.export.default","notApplicableReason":"Could not find export statement"}]},{"name":"Convert import","description":"Convert namespace import to named imports","actions":[{"name":"Convert namespace import to named imports","description":"Convert namespace import to named imports","kind":"refactor.rewrite.import.named","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to default import","actions":[{"name":"Convert named imports to default import","description":"Convert named imports to default import","kind":"refactor.rewrite.import.default","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to namespace import","actions":[{"name":"Convert named imports to namespace import","description":"Convert named imports to namespace import","kind":"refactor.rewrite.import.namespace","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Extract type","description":"Extract type","actions":[{"name":"Extract to typedef","description":"Extract to typedef","kind":"refactor.extract.typedef","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to type alias","description":"Extract to type alias","kind":"refactor.extract.type","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to interface","description":"Extract to interface","kind":"refactor.extract.interface","notApplicableReason":"Selection is not a valid type node"}]},{"name":"Move to a new file","description":"Move to a new file","actions":[{"name":"Move to a new file","description":"Move to a new file","kind":"refactor.move.newFile"}]},{"name":"Move to file","description":"Move to file","actions":[{"name":"Move to file","description":"Move to file","kind":"refactor.move.file"}]},{"name":"Add or remove braces in an arrow function","description":"Add or remove braces in an arrow function","actions":[{"name":"Add braces to arrow function","description":"Add braces to arrow function","kind":"refactor.rewrite.arrow.braces.add","notApplicableReason":"Could not find a containing arrow function"},{"name":"Remove braces from arrow function","description":"Remove braces from arrow function","kind":"refactor.rewrite.arrow.braces.remove","notApplicableReason":"Could not find a containing arrow function"}]},{"name":"Convert to template string","description":"Convert to template string","actions":[{"name":"Convert to template string","description":"Convert to template string","kind":"refactor.rewrite.string","notApplicableReason":"Can only convert string concatenation"}]},{"name":"Extract Symbol","description":"Extract function","actions":[{"name":"Extract Function","description":"Extract function","kind":"refactor.extract.function","notApplicableReason":"Cannot extract empty range."}]},{"name":"Extract Symbol","description":"Extract constant","actions":[{"name":"Extract Constant","description":"Extract constant","kind":"refactor.extract.constant","notApplicableReason":"Cannot extract empty range."}]},{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","actions":[{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","kind":"refactor.rewrite.property.generateAccessors","notApplicableReason":"Could not find property for which to generate accessor"}]},{"name":"Infer function return type","description":"Infer function return type","actions":[{"name":"Infer function return type","description":"Infer function return type","kind":"refactor.rewrite.function.returnType","notApplicableReason":"Return type must be inferred from a function"}]}]}
+Info 61   [21:46:41.534] DirectoryWatcher:: Triggered with /users/martaver/projects/repro/.git/objects/maintenance.lock :: WatchInfo: /users/martaver/projects/repro 1 undefined Config: /Users/martaver/Projects/repro/tsconfig.json WatchType: Wild card directory
+Info 62   [21:46:41.535] Project: /Users/martaver/Projects/repro/tsconfig.json Detected ignored path: /users/martaver/projects/repro/.git/objects/maintenance.lock
+Info 63   [21:46:41.535] Elapsed:: 0.34716796875ms DirectoryWatcher:: Triggered with /users/martaver/projects/repro/.git/objects/maintenance.lock :: WatchInfo: /users/martaver/projects/repro 1 undefined Config: /Users/martaver/Projects/repro/tsconfig.json WatchType: Wild card directory
+Info 64   [21:47:01.590] request:
+    {
+      "seq": 8,
+      "type": "request",
+      "command": "projectInfo",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "needFileNameList": false
+      }
+    }
+Perf 65   [21:47:01.591] 8::projectInfo: elapsed time (in milliseconds) 0.2267
+Info 66   [21:47:01.591] response:
+    {"seq":0,"type":"response","command":"projectInfo","request_seq":8,"success":true,"body":{"configFileName":"/Users/martaver/Projects/repro/tsconfig.json","languageServiceDisabled":false}}
+Info 67   [21:47:01.592] request:
+    {
+      "seq": 9,
+      "type": "request",
+      "command": "getApplicableRefactors",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "startLine": 1,
+        "startOffset": 1,
+        "endLine": 1,
+        "endOffset": 1,
+        "includeInteractiveActions": true
+      }
+    }
+Perf 68   [21:47:01.595] 9::getApplicableRefactors: elapsed time (in milliseconds) 2.5623
+Info 69   [21:47:01.595] response:
+    {"seq":0,"type":"response","command":"getApplicableRefactors","request_seq":9,"success":true,"body":[{"name":"Convert export","description":"Convert default export to named export","actions":[{"name":"Convert default export to named export","description":"Convert default export to named export","kind":"refactor.rewrite.export.named","notApplicableReason":"Could not find export statement"},{"name":"Convert named export to default export","description":"Convert named export to default export","kind":"refactor.rewrite.export.default","notApplicableReason":"Could not find export statement"}]},{"name":"Convert import","description":"Convert namespace import to named imports","actions":[{"name":"Convert namespace import to named imports","description":"Convert namespace import to named imports","kind":"refactor.rewrite.import.named","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to default import","actions":[{"name":"Convert named imports to default import","description":"Convert named imports to default import","kind":"refactor.rewrite.import.default","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to namespace import","actions":[{"name":"Convert named imports to namespace import","description":"Convert named imports to namespace import","kind":"refactor.rewrite.import.namespace","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Extract type","description":"Extract type","actions":[{"name":"Extract to typedef","description":"Extract to typedef","kind":"refactor.extract.typedef","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to type alias","description":"Extract to type alias","kind":"refactor.extract.type","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to interface","description":"Extract to interface","kind":"refactor.extract.interface","notApplicableReason":"Selection is not a valid type node"}]},{"name":"Move to a new file","description":"Move to a new file","actions":[{"name":"Move to a new file","description":"Move to a new file","kind":"refactor.move.newFile"}]},{"name":"Move to file","description":"Move to file","actions":[{"name":"Move to file","description":"Move to file","kind":"refactor.move.file"}]},{"name":"Add or remove braces in an arrow function","description":"Add or remove braces in an arrow function","actions":[{"name":"Add braces to arrow function","description":"Add braces to arrow function","kind":"refactor.rewrite.arrow.braces.add","notApplicableReason":"Containing function is not an arrow function"},{"name":"Remove braces from arrow function","description":"Remove braces from arrow function","kind":"refactor.rewrite.arrow.braces.remove","notApplicableReason":"Containing function is not an arrow function"}]},{"name":"Convert parameters to destructured object","description":"Convert parameters to destructured object","actions":[{"name":"Convert parameters to destructured object","description":"Convert parameters to destructured object","kind":"refactor.rewrite.parameters.toDestructured"}]},{"name":"Convert to template string","description":"Convert to template string","actions":[{"name":"Convert to template string","description":"Convert to template string","kind":"refactor.rewrite.string","notApplicableReason":"Can only convert string concatenation"}]},{"name":"Extract Symbol","description":"Extract function","actions":[{"name":"Extract Function","description":"Extract function","kind":"refactor.extract.function","notApplicableReason":"Cannot extract empty range."}]},{"name":"Extract Symbol","description":"Extract constant","actions":[{"name":"Extract Constant","description":"Extract constant","kind":"refactor.extract.constant","notApplicableReason":"Cannot extract empty range."}]},{"name":"Infer function return type","description":"Infer function return type","actions":[{"name":"Infer function return type","description":"Infer function return type","kind":"refactor.rewrite.function.returnType"}]}]}
+Info 70   [21:47:01.741] request:
+    {
+      "seq": 10,
+      "type": "request",
+      "command": "encodedSemanticClassifications-full",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "start": 0,
+        "length": 814,
+        "format": "2020"
+      }
+    }
+Perf 71   [21:47:01.744] 10::encodedSemanticClassifications-full: elapsed time (in milliseconds) 3.6575
+Info 72   [21:47:01.744] response:
+    {"seq":0,"type":"response","command":"encodedSemanticClassifications-full","request_seq":10,"success":true,"body":{"spans":[9,7,2817,17,1,1281,20,3,1793,25,1,1280,40,3,1792,58,6,769,69,7,3073,79,4,1793,87,5,2561,116,14,3073,146,7,2816,154,6,768,167,7,3073,175,4,1793,183,5,2561,739,5,2089,773,5,2088,789,14,3073],"endOfLineState":0}}
+Info 73   [21:47:01.842] request:
+    {
+      "seq": 11,
+      "type": "request",
+      "command": "getApplicableRefactors",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "startLine": 30,
+        "startOffset": 24,
+        "endLine": 30,
+        "endOffset": 24,
+        "includeInteractiveActions": true
+      }
+    }
+Perf 74   [21:47:01.843] 11::getApplicableRefactors: elapsed time (in milliseconds) 0.5887
+Info 75   [21:47:01.843] response:
+    {"seq":0,"type":"response","command":"getApplicableRefactors","request_seq":11,"success":true,"body":[{"name":"Convert export","description":"Convert default export to named export","actions":[{"name":"Convert default export to named export","description":"Convert default export to named export","kind":"refactor.rewrite.export.named","notApplicableReason":"Could not find export statement"},{"name":"Convert named export to default export","description":"Convert named export to default export","kind":"refactor.rewrite.export.default","notApplicableReason":"Could not find export statement"}]},{"name":"Convert import","description":"Convert namespace import to named imports","actions":[{"name":"Convert namespace import to named imports","description":"Convert namespace import to named imports","kind":"refactor.rewrite.import.named","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to default import","actions":[{"name":"Convert named imports to default import","description":"Convert named imports to default import","kind":"refactor.rewrite.import.default","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to namespace import","actions":[{"name":"Convert named imports to namespace import","description":"Convert named imports to namespace import","kind":"refactor.rewrite.import.namespace","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Extract type","description":"Extract type","actions":[{"name":"Extract to typedef","description":"Extract to typedef","kind":"refactor.extract.typedef","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to type alias","description":"Extract to type alias","kind":"refactor.extract.type","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to interface","description":"Extract to interface","kind":"refactor.extract.interface","notApplicableReason":"Selection is not a valid type node"}]},{"name":"Move to a new file","description":"Move to a new file","actions":[{"name":"Move to a new file","description":"Move to a new file","kind":"refactor.move.newFile"}]},{"name":"Move to file","description":"Move to file","actions":[{"name":"Move to file","description":"Move to file","kind":"refactor.move.file"}]},{"name":"Add or remove braces in an arrow function","description":"Add or remove braces in an arrow function","actions":[{"name":"Add braces to arrow function","description":"Add braces to arrow function","kind":"refactor.rewrite.arrow.braces.add","notApplicableReason":"Could not find a containing arrow function"},{"name":"Remove braces from arrow function","description":"Remove braces from arrow function","kind":"refactor.rewrite.arrow.braces.remove","notApplicableReason":"Could not find a containing arrow function"}]},{"name":"Convert to template string","description":"Convert to template string","actions":[{"name":"Convert to template string","description":"Convert to template string","kind":"refactor.rewrite.string","notApplicableReason":"Can only convert string concatenation"}]},{"name":"Extract Symbol","description":"Extract function","actions":[{"name":"Extract Function","description":"Extract function","kind":"refactor.extract.function","notApplicableReason":"Cannot extract empty range."}]},{"name":"Extract Symbol","description":"Extract constant","actions":[{"name":"Extract Constant","description":"Extract constant","kind":"refactor.extract.constant","notApplicableReason":"Cannot extract empty range."}]},{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","actions":[{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","kind":"refactor.rewrite.property.generateAccessors","notApplicableReason":"Could not find property for which to generate accessor"}]},{"name":"Infer function return type","description":"Infer function return type","actions":[{"name":"Infer function return type","description":"Infer function return type","kind":"refactor.rewrite.function.returnType","notApplicableReason":"Return type must be inferred from a function"}]}]}
+Info 76   [21:47:01.892] request:
+    {
+      "seq": 12,
+      "type": "request",
+      "command": "geterr",
+      "arguments": {
+        "delay": 0,
+        "files": [
+          "/Users/martaver/Projects/repro/index.ts"
+        ]
+      }
+    }
+Perf 77   [21:47:01.892] 12::geterr: async elapsed time (in milliseconds) 0.1919
+Info 78   [21:47:01.893] event:
+    {"seq":0,"type":"event","event":"syntaxDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[]}}
+Info 79   [21:47:01.894] event:
+    {"seq":0,"type":"event","event":"semanticDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[]}}
+Info 80   [21:47:01.894] event:
+    {"seq":0,"type":"event","event":"suggestionDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[{"start":{"line":13,"offset":11},"end":{"line":13,"offset":15},"text":"'args' is declared but its value is never read.","code":6133,"category":"suggestion","reportsUnnecessary":true}]}}
+Info 81   [21:47:01.894] event:
+    {"seq":0,"type":"event","event":"requestCompleted","body":{"request_seq":12}}
+Info 82   [21:47:02.203] request:
+    {
+      "seq": 13,
+      "type": "request",
+      "command": "getApplicableRefactors",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "startLine": 30,
+        "startOffset": 24,
+        "endLine": 30,
+        "endOffset": 24,
+        "includeInteractiveActions": true
+      }
+    }
+Perf 83   [21:47:02.203] 13::getApplicableRefactors: elapsed time (in milliseconds) 0.6398
+Info 84   [21:47:02.204] response:
+    {"seq":0,"type":"response","command":"getApplicableRefactors","request_seq":13,"success":true,"body":[{"name":"Convert export","description":"Convert default export to named export","actions":[{"name":"Convert default export to named export","description":"Convert default export to named export","kind":"refactor.rewrite.export.named","notApplicableReason":"Could not find export statement"},{"name":"Convert named export to default export","description":"Convert named export to default export","kind":"refactor.rewrite.export.default","notApplicableReason":"Could not find export statement"}]},{"name":"Convert import","description":"Convert namespace import to named imports","actions":[{"name":"Convert namespace import to named imports","description":"Convert namespace import to named imports","kind":"refactor.rewrite.import.named","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to default import","actions":[{"name":"Convert named imports to default import","description":"Convert named imports to default import","kind":"refactor.rewrite.import.default","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to namespace import","actions":[{"name":"Convert named imports to namespace import","description":"Convert named imports to namespace import","kind":"refactor.rewrite.import.namespace","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Extract type","description":"Extract type","actions":[{"name":"Extract to typedef","description":"Extract to typedef","kind":"refactor.extract.typedef","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to type alias","description":"Extract to type alias","kind":"refactor.extract.type","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to interface","description":"Extract to interface","kind":"refactor.extract.interface","notApplicableReason":"Selection is not a valid type node"}]},{"name":"Move to a new file","description":"Move to a new file","actions":[{"name":"Move to a new file","description":"Move to a new file","kind":"refactor.move.newFile"}]},{"name":"Move to file","description":"Move to file","actions":[{"name":"Move to file","description":"Move to file","kind":"refactor.move.file"}]},{"name":"Add or remove braces in an arrow function","description":"Add or remove braces in an arrow function","actions":[{"name":"Add braces to arrow function","description":"Add braces to arrow function","kind":"refactor.rewrite.arrow.braces.add","notApplicableReason":"Could not find a containing arrow function"},{"name":"Remove braces from arrow function","description":"Remove braces from arrow function","kind":"refactor.rewrite.arrow.braces.remove","notApplicableReason":"Could not find a containing arrow function"}]},{"name":"Convert to template string","description":"Convert to template string","actions":[{"name":"Convert to template string","description":"Convert to template string","kind":"refactor.rewrite.string","notApplicableReason":"Can only convert string concatenation"}]},{"name":"Extract Symbol","description":"Extract function","actions":[{"name":"Extract Function","description":"Extract function","kind":"refactor.extract.function","notApplicableReason":"Cannot extract empty range."}]},{"name":"Extract Symbol","description":"Extract constant","actions":[{"name":"Extract Constant","description":"Extract constant","kind":"refactor.extract.constant","notApplicableReason":"Cannot extract empty range."}]},{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","actions":[{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","kind":"refactor.rewrite.property.generateAccessors","notApplicableReason":"Could not find property for which to generate accessor"}]},{"name":"Infer function return type","description":"Infer function return type","actions":[{"name":"Infer function return type","description":"Infer function return type","kind":"refactor.rewrite.function.returnType","notApplicableReason":"Return type must be inferred from a function"}]}]}
+Info 85   [21:47:02.849] request:
+    {
+      "seq": 14,
+      "type": "request",
+      "command": "documentHighlights",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "line": 26,
+        "offset": 32,
+        "filesToSearch": [
+          "/Users/martaver/Projects/repro/index.ts"
+        ]
+      }
+    }
+Perf 86   [21:47:02.851] 14::documentHighlights: elapsed time (in milliseconds) 1.4950
+Info 87   [21:47:02.851] response:
+    {"seq":0,"type":"response","command":"documentHighlights","request_seq":14,"success":true,"body":[]}
+Info 88   [21:47:03.235] request:
+    {
+      "seq": 15,
+      "type": "request",
+      "command": "updateOpen",
+      "arguments": {
+        "changedFiles": [
+          {
+            "fileName": "/Users/martaver/Projects/repro/index.ts",
+            "textChanges": [
+              {
+                "newText": " ",
+                "start": {
+                  "line": 26,
+                  "offset": 32
+                },
+                "end": {
+                  "line": 26,
+                  "offset": 32
+                }
+              }
+            ]
+          }
+        ],
+        "closedFiles": [],
+        "openFiles": []
+      }
+    }
+Perf 89   [21:47:03.250] 15::updateOpen: elapsed time (in milliseconds) 15.0462
+Info 90   [21:47:03.250] response:
+    {"seq":0,"type":"response","command":"updateOpen","request_seq":15,"success":true,"body":true}
+Info 91   [21:47:03.251] request:
+    {
+      "seq": 16,
+      "type": "request",
+      "command": "encodedSemanticClassifications-full",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "start": 0,
+        "length": 815,
+        "format": "2020"
+      }
+    }
+Info 92   [21:47:03.251] Starting updateGraphWorker: Project: /Users/martaver/Projects/repro/tsconfig.json
+Info 93   [21:47:03.256] Finishing updateGraphWorker: Project: /Users/martaver/Projects/repro/tsconfig.json Version: 2 structureChanged: false structureIsReused:: Completely Elapsed: 5.300815105438232ms
+Info 94   [21:47:03.256] Different program with same set of files
+Perf 95   [21:47:03.261] 16::encodedSemanticClassifications-full: elapsed time (in milliseconds) 10.8569
+Info 96   [21:47:03.261] response:
+    {"seq":0,"type":"response","command":"encodedSemanticClassifications-full","request_seq":16,"success":true,"performanceData":{"updateGraphDurationMs":5.300815105438232},"body":{"spans":[9,7,2817,17,1,1281,20,3,1793,25,1,1280,40,3,1792,58,6,769,69,7,3073,79,4,1793,87,5,2561,116,14,3073,146,7,2816,154,6,768,167,7,3073,175,4,1793,183,5,2561,739,5,2089,774,5,2088,790,14,3073],"endOfLineState":0}}
+Info 97   [21:47:03.387] request:
+    {
+      "seq": 17,
+      "type": "request",
+      "command": "geterr",
+      "arguments": {
+        "delay": 0,
+        "files": [
+          "/Users/martaver/Projects/repro/index.ts"
+        ]
+      }
+    }
+Perf 98   [21:47:03.387] 17::geterr: async elapsed time (in milliseconds) 0.1880
+Info 99   [21:47:03.388] event:
+    {"seq":0,"type":"event","event":"syntaxDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[]}}
+Info 100  [21:47:03.389] event:
+    {"seq":0,"type":"event","event":"semanticDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[{"start":{"line":26,"offset":13},"end":{"line":26,"offset":18},"text":"'value' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.","code":7022,"category":"error"}]}}
+Info 101  [21:47:03.390] event:
+    {"seq":0,"type":"event","event":"suggestionDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[{"start":{"line":13,"offset":11},"end":{"line":13,"offset":15},"text":"'args' is declared but its value is never read.","code":6133,"category":"suggestion","reportsUnnecessary":true}]}}
+Info 102  [21:47:03.390] event:
+    {"seq":0,"type":"event","event":"requestCompleted","body":{"request_seq":17}}
+Info 103  [21:47:03.865] request:
+    {
+      "seq": 18,
+      "type": "request",
+      "command": "organizeImports",
+      "arguments": {
+        "scope": {
+          "type": "file",
+          "args": {
+            "file": "/Users/martaver/Projects/repro/index.ts"
+          }
+        },
+        "skipDestructiveCodeActions": false,
+        "mode": "All"
+      }
+    }
+Perf 104  [21:47:03.866] 18::organizeImports: elapsed time (in milliseconds) 0.9939
+Info 105  [21:47:03.866] response:
+    {"seq":0,"type":"response","command":"organizeImports","request_seq":18,"success":true,"body":[]}
+Info 106  [21:47:04.058] request:
+    {
+      "seq": 19,
+      "type": "request",
+      "command": "updateOpen",
+      "arguments": {
+        "changedFiles": [
+          {
+            "fileName": "/Users/martaver/Projects/repro/index.ts",
+            "textChanges": [
+              {
+                "newText": "",
+                "start": {
+                  "line": 26,
+                  "offset": 32
+                },
+                "end": {
+                  "line": 26,
+                  "offset": 33
+                }
+              }
+            ]
+          }
+        ],
+        "closedFiles": [],
+        "openFiles": []
+      }
+    }
+Perf 107  [21:47:04.058] 19::updateOpen: elapsed time (in milliseconds) 0.1894
+Info 108  [21:47:04.058] response:
+    {"seq":0,"type":"response","command":"updateOpen","request_seq":19,"success":true,"body":true}
+Info 109  [21:47:04.059] request:
+    {
+      "seq": 20,
+      "type": "request",
+      "command": "encodedSemanticClassifications-full",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "start": 0,
+        "length": 814,
+        "format": "2020"
+      }
+    }
+Info 110  [21:47:04.059] Starting updateGraphWorker: Project: /Users/martaver/Projects/repro/tsconfig.json
+Info 111  [21:47:04.062] Finishing updateGraphWorker: Project: /Users/martaver/Projects/repro/tsconfig.json Version: 3 structureChanged: false structureIsReused:: Completely Elapsed: 2.742252826690674ms
+Info 112  [21:47:04.062] Different program with same set of files
+Perf 113  [21:47:04.064] 20::encodedSemanticClassifications-full: elapsed time (in milliseconds) 5.1089
+Info 114  [21:47:04.064] response:
+    {"seq":0,"type":"response","command":"encodedSemanticClassifications-full","request_seq":20,"success":true,"performanceData":{"updateGraphDurationMs":2.742252826690674},"body":{"spans":[9,7,2817,17,1,1281,20,3,1793,25,1,1280,40,3,1792,58,6,769,69,7,3073,79,4,1793,87,5,2561,116,14,3073,146,7,2816,154,6,768,167,7,3073,175,4,1793,183,5,2561,739,5,2089,773,5,2088,789,14,3073],"endOfLineState":0}}
+Info 115  [21:47:04.157] request:
+    {
+      "seq": 21,
+      "type": "request",
+      "command": "getApplicableRefactors",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "startLine": 26,
+        "startOffset": 32,
+        "endLine": 26,
+        "endOffset": 32,
+        "includeInteractiveActions": true
+      }
+    }
+Perf 116  [21:47:04.159] 21::getApplicableRefactors: elapsed time (in milliseconds) 2.0105
+Info 117  [21:47:04.159] response:
+    {"seq":0,"type":"response","command":"getApplicableRefactors","request_seq":21,"success":true,"body":[{"name":"Convert export","description":"Convert default export to named export","actions":[{"name":"Convert default export to named export","description":"Convert default export to named export","kind":"refactor.rewrite.export.named","notApplicableReason":"Could not find export statement"},{"name":"Convert named export to default export","description":"Convert named export to default export","kind":"refactor.rewrite.export.default","notApplicableReason":"Could not find export statement"}]},{"name":"Convert import","description":"Convert namespace import to named imports","actions":[{"name":"Convert namespace import to named imports","description":"Convert namespace import to named imports","kind":"refactor.rewrite.import.named","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to default import","actions":[{"name":"Convert named imports to default import","description":"Convert named imports to default import","kind":"refactor.rewrite.import.default","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to namespace import","actions":[{"name":"Convert named imports to namespace import","description":"Convert named imports to namespace import","kind":"refactor.rewrite.import.namespace","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Extract type","description":"Extract type","actions":[{"name":"Extract to typedef","description":"Extract to typedef","kind":"refactor.extract.typedef","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to type alias","description":"Extract to type alias","kind":"refactor.extract.type","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to interface","description":"Extract to interface","kind":"refactor.extract.interface","notApplicableReason":"Selection is not a valid type node"}]},{"name":"Inline variable","description":"Inline variable","actions":[{"name":"Inline variable","description":"Inline variable","kind":"refactor.inline.variable","notApplicableReason":"Could not find variable to inline."}]},{"name":"Move to a new file","description":"Move to a new file","actions":[{"name":"Move to a new file","description":"Move to a new file","kind":"refactor.move.newFile"}]},{"name":"Move to file","description":"Move to file","actions":[{"name":"Move to file","description":"Move to file","kind":"refactor.move.file"}]},{"name":"Add or remove braces in an arrow function","description":"Add or remove braces in an arrow function","actions":[{"name":"Add braces to arrow function","description":"Add braces to arrow function","kind":"refactor.rewrite.arrow.braces.add","notApplicableReason":"Containing function is not an arrow function"},{"name":"Remove braces from arrow function","description":"Remove braces from arrow function","kind":"refactor.rewrite.arrow.braces.remove","notApplicableReason":"Containing function is not an arrow function"}]},{"name":"Convert to template string","description":"Convert to template string","actions":[{"name":"Convert to template string","description":"Convert to template string","kind":"refactor.rewrite.string","notApplicableReason":"Can only convert string concatenation"}]},{"name":"Extract Symbol","description":"Extract function","actions":[{"name":"Extract Function","description":"Extract function","kind":"refactor.extract.function","notApplicableReason":"Cannot extract empty range."}]},{"name":"Extract Symbol","description":"Extract constant","actions":[{"name":"Extract Constant","description":"Extract constant","kind":"refactor.extract.constant","notApplicableReason":"Cannot extract empty range."}]},{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","actions":[{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","kind":"refactor.rewrite.property.generateAccessors","notApplicableReason":"Could not find property for which to generate accessor"}]},{"name":"Infer function return type","description":"Infer function return type","actions":[{"name":"Infer function return type","description":"Infer function return type","kind":"refactor.rewrite.function.returnType","notApplicableReason":"Return type must be inferred from a function"}]}]}
+Info 118  [21:47:04.236] request:
+    {
+      "seq": 22,
+      "type": "request",
+      "command": "geterr",
+      "arguments": {
+        "delay": 0,
+        "files": [
+          "/Users/martaver/Projects/repro/index.ts"
+        ]
+      }
+    }
+Perf 119  [21:47:04.236] 22::geterr: async elapsed time (in milliseconds) 0.1827
+Info 120  [21:47:04.237] event:
+    {"seq":0,"type":"event","event":"syntaxDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[]}}
+Info 121  [21:47:04.238] event:
+    {"seq":0,"type":"event","event":"semanticDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[{"start":{"line":26,"offset":13},"end":{"line":26,"offset":18},"text":"'value' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.","code":7022,"category":"error"}]}}
+Info 122  [21:47:04.239] event:
+    {"seq":0,"type":"event","event":"suggestionDiag","body":{"file":"/Users/martaver/Projects/repro/index.ts","diagnostics":[{"start":{"line":13,"offset":11},"end":{"line":13,"offset":15},"text":"'args' is declared but its value is never read.","code":6133,"category":"suggestion","reportsUnnecessary":true}]}}
+Info 123  [21:47:04.239] event:
+    {"seq":0,"type":"event","event":"requestCompleted","body":{"request_seq":22}}
+Info 124  [21:47:04.540] request:
+    {
+      "seq": 23,
+      "type": "request",
+      "command": "getApplicableRefactors",
+      "arguments": {
+        "file": "/Users/martaver/Projects/repro/index.ts",
+        "startLine": 26,
+        "startOffset": 32,
+        "endLine": 26,
+        "endOffset": 32,
+        "includeInteractiveActions": true
+      }
+    }
+Perf 125  [21:47:04.540] 23::getApplicableRefactors: elapsed time (in milliseconds) 0.7449
+Info 126  [21:47:04.540] response:
+    {"seq":0,"type":"response","command":"getApplicableRefactors","request_seq":23,"success":true,"body":[{"name":"Convert export","description":"Convert default export to named export","actions":[{"name":"Convert default export to named export","description":"Convert default export to named export","kind":"refactor.rewrite.export.named","notApplicableReason":"Could not find export statement"},{"name":"Convert named export to default export","description":"Convert named export to default export","kind":"refactor.rewrite.export.default","notApplicableReason":"Could not find export statement"}]},{"name":"Convert import","description":"Convert namespace import to named imports","actions":[{"name":"Convert namespace import to named imports","description":"Convert namespace import to named imports","kind":"refactor.rewrite.import.named","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to default import","actions":[{"name":"Convert named imports to default import","description":"Convert named imports to default import","kind":"refactor.rewrite.import.default","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Convert import","description":"Convert named imports to namespace import","actions":[{"name":"Convert named imports to namespace import","description":"Convert named imports to namespace import","kind":"refactor.rewrite.import.namespace","notApplicableReason":"Selection is not an import declaration."}]},{"name":"Extract type","description":"Extract type","actions":[{"name":"Extract to typedef","description":"Extract to typedef","kind":"refactor.extract.typedef","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to type alias","description":"Extract to type alias","kind":"refactor.extract.type","notApplicableReason":"Selection is not a valid type node"},{"name":"Extract to interface","description":"Extract to interface","kind":"refactor.extract.interface","notApplicableReason":"Selection is not a valid type node"}]},{"name":"Inline variable","description":"Inline variable","actions":[{"name":"Inline variable","description":"Inline variable","kind":"refactor.inline.variable","notApplicableReason":"Could not find variable to inline."}]},{"name":"Move to a new file","description":"Move to a new file","actions":[{"name":"Move to a new file","description":"Move to a new file","kind":"refactor.move.newFile"}]},{"name":"Move to file","description":"Move to file","actions":[{"name":"Move to file","description":"Move to file","kind":"refactor.move.file"}]},{"name":"Add or remove braces in an arrow function","description":"Add or remove braces in an arrow function","actions":[{"name":"Add braces to arrow function","description":"Add braces to arrow function","kind":"refactor.rewrite.arrow.braces.add","notApplicableReason":"Containing function is not an arrow function"},{"name":"Remove braces from arrow function","description":"Remove braces from arrow function","kind":"refactor.rewrite.arrow.braces.remove","notApplicableReason":"Containing function is not an arrow function"}]},{"name":"Convert to template string","description":"Convert to template string","actions":[{"name":"Convert to template string","description":"Convert to template string","kind":"refactor.rewrite.string","notApplicableReason":"Can only convert string concatenation"}]},{"name":"Extract Symbol","description":"Extract function","actions":[{"name":"Extract Function","description":"Extract function","kind":"refactor.extract.function","notApplicableReason":"Cannot extract empty range."}]},{"name":"Extract Symbol","description":"Extract constant","actions":[{"name":"Extract Constant","description":"Extract constant","kind":"refactor.extract.constant","notApplicableReason":"Cannot extract empty range."}]},{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","actions":[{"name":"Generate 'get' and 'set' accessors","description":"Generate 'get' and 'set' accessors","kind":"refactor.rewrite.property.generateAccessors","notApplicableReason":"Could not find property for which to generate accessor"}]},{"name":"Infer function return type","description":"Infer function return type","actions":[{"name":"Infer function return type","description":"Infer function return type","kind":"refactor.rewrite.function.returnType","notApplicableReason":"Return type must be inferred from a function"}]}]}
