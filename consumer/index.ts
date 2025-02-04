@@ -1,6 +1,11 @@
-import { Container } from "../pkg/dist/Container";
+import { Container } from "pkg";
 
-export class HomePage extends Container<unknown> {
+/**
+ * The error is also displaye if importing the .d.ts file directly.
+ */
+// import { Container } from "../pkg/dist/Container";
+
+export class HomePage extends Container<unknown> {  
   // Invoke intellisense completion / suggestions here
   // Observe the error in Output > Extension Host
 
