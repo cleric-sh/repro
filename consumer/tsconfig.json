@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": [
+    "@tsconfig/node20",
+    "@tsconfig/strictest"
+  ],
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "ES2022"
+    ],
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "resolveJsonModule": true,
+    "checkJs": false,
+    "exactOptionalPropertyTypes": false,
+    "noErrorTruncation": true
+  },
+  "include": ["index.ts"],
+  "exclude": [
+    "node_modules"
+  ]
+}

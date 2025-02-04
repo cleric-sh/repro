@@ -1,0 +1,21 @@
+{
+  "name": "repro-tsserver-RangeError-in-vscode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "compile": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/node": "20",
+    "pkg": "workspace:*"
+  }
+}
