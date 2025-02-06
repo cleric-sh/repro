@@ -1,15 +1,21 @@
 {
-  "name": "repro-phantom-ts7022-error-in-vscode",
+  "name": "repro-playwright-makematchers-declaration-error",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "compile": "tsc --noEmit"
+    "compile": "tsc -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.4.0-beta"
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@types/node": "20"    
+  },
+  "peerDependencies": {
+    "playwright": "^1.50.1"
   }
 }

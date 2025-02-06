@@ -1,9 +1,14 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
+  "$schema": "https://json.schemastore.org/tsconfig", 
   "compilerOptions": {
-    "noEmit": true,
-    "noImplicitAny": true
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "isolatedDeclarations": true
   },
+  "include": ["src/index.ts"],
   "exclude": [
     "node_modules"
   ]
